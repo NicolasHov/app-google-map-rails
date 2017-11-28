@@ -1,24 +1,51 @@
-<head>
-    <title>Simple Map</title>
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
-   
-  </head>
-  <body>
+<html>
 
-    <div class="container">
-        <%= form_tag('/get') do %>
-        <%= label_tag(:latit, "Lattitude:") %>
-        <%= text_field_tag(:latit) %>
-        <%= label_tag(:longit, "Longitude:") %>
-        <%= text_field_tag(:longit) %>
-        <%= submit_tag("Search") %>
-      <% end %>
-    </div>
+    <head>
+        <title>Simple Map</title>
+        <meta name="viewport" content="initial-scale=1.0">
+        <meta charset="utf-8">
+        
+    </head>
+    <body>
+        
+        <div class="container">
+            <%= form_tag(root_path, method: :get) do %>
+            <%= label_tag(:latit, "Lattitude:") %>
+            <%= text_field_tag(:latit) %>
+            <%= label_tag(:longit, "Longitude:") %>
+            <%= text_field_tag(:longit) %>
+            <%= label_tag(:msg, "Message:") %>
+            <%= text_area_tag(:msg, "Mon message ici", size: "24x6") %>
+            <%= submit_tag("Search") %>
+            <% end %>
+           
+        </div>
+        
+        <div id="map"></div>
+        
+        <%= javascript_tag do %>
+            var lat 
+            var map;
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: <%= @info[:latit] %>, lng: <%= @info[:longit] %> },
+                zoom: 9
+                });
+            };
+        <% end %>
 
-    <div id="map"></div>
+        <style>
+            #map {
+                height: 500px;
+                width: 100%;
+                }
+                
+                .container {
+                    height: 80%;
+                }
+        </style>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAUarZPNMdG9EjKdGuKvcUyovLI3LdvkQ&callback=initMap" async defer></script>
+        
+    </body>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAUarZPNMdG9EjKdGuKvcUyovLI3LdvkQ&callback=initMap"
-async defer></script>
-
-  </body>
+</html>

@@ -14,10 +14,18 @@
 //= require turbolinks
 //= require_tree .
 
-var map;
-function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: -34.397, lng: 150.644},
-    zoom: 8
-  });
-}
+
+
+
+// function goTo(latitude, longitude) {
+//     map = new google.maps.Map(document.getElementById('map'), {        
+//         center: {lat: latitude, lng: longitude},
+//         zoom: 8
+//     });
+// };
+
+
+// var latit = document.getElementById('latit').value.to_i;
+// var longit = document.getElementById('longit').value.to_i;
+
+// goTo(latit, longit);
