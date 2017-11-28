@@ -37,7 +37,7 @@
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
                 center: myLatLng,
-                zoom: 9
+                zoom: 5
             });
             var marker = new google.maps.Marker({
                 position: myLatLng,
@@ -52,7 +52,7 @@
             infowindow.open(map,marker);
         };
 
-        <!-- TODO ne fonctionne pas -->
+        <!-- TODO WIP -->
         
       var neighborhoods = [
       {lat: 52.511, lng: 13.447},
