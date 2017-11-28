@@ -16,17 +16,6 @@
 
 
 
-//  var marker = new google.maps.Marker({
-//     position: myLatLng,
-//     draggable: true,
-//     animation: google.maps.Animation.DROP,
-//     map: map,
-//     title: '<%= @info[:msg] %>'
-// }); -->
-//  marker.addListener('click', toggleBounce);
-
-// };
-
 // function toggleBounce() {
 // if (marker.getAnimation() !== null) {
 // marker.setAnimation(null);

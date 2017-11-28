@@ -8,44 +8,52 @@
     </head>
     <body>
         
+        <h1>Ma première Map</h1>
         <div class="container">
             <%= form_tag(root_path, method: :get) do %>
-            <%= label_tag(:latit, "Lattitude:") %>
+            <%= label_tag(:latit, "Latitude:") %>
             <%= text_field_tag(:latit) %>
             <%= label_tag(:longit, "Longitude:") %>
             <%= text_field_tag(:longit) %>
             <%= label_tag(:msg, "Message:") %>
-            <%= text_area_tag(:msg, "Mon message ici", size: "24x6") %>
+            <%= text_area_tag(:msg, "Mon message ici", size: "12x2") %>
             <%= submit_tag("Search") %>
             <% end %>
            
         </div>
-        <div> <%= @info[:msg] %> </div>
+        <br>
         <div id="map"></div>
+       
         
         <%= javascript_tag do %> 
-            var map;
-            function initMap() {
-                var myLatLng = {lat: <%= @info[:latit] %>, lng: <%= @info[:longit] %> };
-                
-                map = new google.maps.Map(document.getElementById('map'), {
+        
+        
+        var map;
+        var myLatLng = {lat: <%= @info[:latit] %>, lng: <%= @info[:longit] %>};
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
                 center: myLatLng,
                 zoom: 9
-                });
-            };
-               
-             var marker = new google.maps.Marker({
-                    position: myLatLng,
-                    draggable: true,
-                    animation: google.maps.Animation.DROP,
-                    map: map,
-                    title: '<%= @info[:msg] %>'
-                });
-              
+            });
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                animation: google.maps.Animation.DROP,
+                map: map
+            });
+            marker.setMap(map);
 
-            
-                
+            var infowindow = new google.maps.InfoWindow({
+                content: "<%= @info[:msg] %>"
+            });
+            infowindow.open(map,marker);
+        };
+        
+        
         <% end %>
+        
+        <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API'] %>&callback=initMap"
+            async defer></script>
 
         <style>
             #map {
@@ -57,7 +65,6 @@
                     height: 80%;
                 }
         </style>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAUarZPNMdG9EjKdGuKvcUyovLI3LdvkQ&callback=initMap" async defer></script>
         
     </body>
 
