@@ -20,18 +20,31 @@
             <% end %>
            
         </div>
-        
+        <div> <%= @info[:msg] %> </div>
         <div id="map"></div>
         
-        <%= javascript_tag do %>
-            var lat 
+        <%= javascript_tag do %> 
             var map;
             function initMap() {
+                var myLatLng = {lat: <%= @info[:latit] %>, lng: <%= @info[:longit] %> };
+                
                 map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: <%= @info[:latit] %>, lng: <%= @info[:longit] %> },
+                center: myLatLng,
                 zoom: 9
                 });
             };
+               
+             var marker = new google.maps.Marker({
+                    position: myLatLng,
+                    draggable: true,
+                    animation: google.maps.Animation.DROP,
+                    map: map,
+                    title: '<%= @info[:msg] %>'
+                });
+              
+
+            
+                
         <% end %>
 
         <style>

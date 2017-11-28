@@ -16,16 +16,29 @@
 
 
 
+//  var marker = new google.maps.Marker({
+//     position: myLatLng,
+//     draggable: true,
+//     animation: google.maps.Animation.DROP,
+//     map: map,
+//     title: '<%= @info[:msg] %>'
+// }); -->
+//  marker.addListener('click', toggleBounce);
 
-// function goTo(latitude, longitude) {
-//     map = new google.maps.Map(document.getElementById('map'), {        
-//         center: {lat: latitude, lng: longitude},
-//         zoom: 8
-//     });
 // };
 
+// function toggleBounce() {
+// if (marker.getAnimation() !== null) {
+// marker.setAnimation(null);
+// } else {
+// marker.setAnimation(google.maps.Animation.BOUNCE);
+// }
+// };
 
-// var latit = document.getElementById('latit').value.to_i;
-// var longit = document.getElementById('longit').value.to_i;
-
-// goTo(latit, longit);
+// function drop() {
+// for (var i =0; i < markerArray.length; i++) {
+//   setTimeout(function() {
+//     addMarkerMethod();
+//   }, i * 200);
+// }
+// }; 
