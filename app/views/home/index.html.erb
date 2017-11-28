@@ -22,6 +22,9 @@
            
         </div>
         <br>
+        <div id="floating-panel">
+                <button id="drop" onclick="drop()">Drop Markers</button>
+        </div>
         <div id="map"></div>
        
         
@@ -48,7 +51,41 @@
             });
             infowindow.open(map,marker);
         };
+
+        <!-- TODO ne fonctionne pas -->
         
+      var neighborhoods = [
+      {lat: 52.511, lng: 13.447},
+      {lat: 52.549, lng: 13.422},
+      {lat: 52.497, lng: 13.396},
+      {lat: 52.517, lng: 13.394}
+    ];
+
+    var markers = [];
+
+      function drop() {
+        clearMarkers();
+        for (var i = 0; i < neighborhoods.length; i++) {
+          addMarkerWithTimeout(neighborhoods[i], i * 200);
+        }
+      };
+
+      function addMarkerWithTimeout(position, timeout) {
+        window.setTimeout(function() {
+          markers.push(new google.maps.Marker({
+            position: position,
+            map: map,
+            animation: google.maps.Animation.DROP
+          }));
+        }, timeout);
+      };
+
+      function clearMarkers() {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(null);
+        }
+        markers = [];
+      };
         
         <% end %>
         
@@ -64,6 +101,23 @@
                 .container {
                     height: 80%;
                 }
+
+                #floating-panel {
+                    position: absolute;
+                    top: 150px;
+                    left: 20%;
+                    z-index: 5;
+                    background-color: #fff;
+                    padding: 5px;
+                    border: 1px solid #999;
+                    text-align: center;
+                    font-family: 'Roboto','sans-serif';
+                    line-height: 30px;
+                    padding-left: 10px;
+                  }
+                  #floating-panel {
+                    margin-left: -52px;
+                  }
         </style>
         
     </body>
